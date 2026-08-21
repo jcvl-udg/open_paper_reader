@@ -1,0 +1,31 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+import { sanityClient } from 'sanity:client';
+
+// Hacemos la consulta a Sanity
+const papers = await sanityClient.fetch(`*[_type == "paper"] | order(_createdAt desc)`);
+---
+
+<Layout metadata={{ title: 'Hello Sanity' }}>
+  <section class="max-w-4xl mx-auto px-6 py-20">
+    <h1 class="text-4xl md:text-5xl font-bold mb-12 text-center">Hello World Científico</h1>
+    
+    <div class="space-y-8">
+      {papers && papers.length > 0 ? (
+        papers.map((paper: any) => (
+          <article class="p-8 bg-white dark:bg-slate-900 rounded-xl border border-gray-200 dark:border-slate-800 shadow-sm">
+            <div class="text-sm font-semibold uppercase tracking-wider text-blue-600 dark:text-blue-400 mb-2">
+              Paper de Sanity
+            </div>
+            <h2 class="text-2xl font-bold mb-4">{paper.title || 'Sin título'}</h2>
+            <p class="text-gray-600 dark:text-gray-400 text-lg">
+              {paper.abstract || 'Sin abstract'}
+            </p>
+          </article>
+        ))
+      ) : (
+        <p class="text-center text-red-500 text-lg">No se encontraron artículos.</p>
+      )}
+    </div>
+  </section>
+</Layout>

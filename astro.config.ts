@@ -17,6 +17,10 @@ import astrowind from './vendor/integration';
 
 import { readingTimeRemarkPlugin, responsiveTablesRehypePlugin } from './src/utils/frontmatter';
 
+import sanity from '@sanity/astro';
+import { loadEnv } from 'vite';
+const env = loadEnv(process.env.NODE_ENV || 'production', process.cwd(), '');
+
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 const hasExternalScripts = false;
@@ -93,6 +97,13 @@ export default defineConfig({
 
     astrowind({
       config: './src/config.yaml',
+    }),
+
+    sanity({
+      projectId: env.PUBLIC_SANITY_PROJECT_ID || '9j4jgbrs', // El || sirve de respaldo
+      dataset: env.PUBLIC_SANITY_DATASET || 'production',
+      useCdn: false, // false para asegurar que trae datos frescos al compilar
+      apiVersion: '2024-03-20', // Usa la fecha actual o esta
     }),
   ],
 
