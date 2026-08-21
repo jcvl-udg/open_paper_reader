@@ -43,9 +43,18 @@ export default defineConfig({
   fonts: [
     {
       provider: fontProviders.fontsource(),
+      name: 'Merriweather',
+      cssVariable: '--font-serif-display',
+      weights: ['300', '400', '700'],
+      styles: ['normal', 'italic'],
+      subsets: ['latin'],
+      fallbacks: ['serif'],
+    },
+    {
+      provider: fontProviders.fontsource(),
       name: 'Inter',
-      cssVariable: '--font-inter',
-      weights: ['100 900'],
+      cssVariable: '--font-sans',
+      weights: ['400', '500', '600', '700'],
       styles: ['normal'],
       subsets: ['latin'],
       fallbacks: ['sans-serif'],
@@ -100,8 +109,8 @@ export default defineConfig({
     }),
 
     sanity({
-      projectId: env.PUBLIC_SANITY_PROJECT_ID || '9j4jgbrs', // El || sirve de respaldo
-      dataset: env.PUBLIC_SANITY_DATASET || 'production',
+      projectId: '9j4jgbrs', // El || sirve de respaldo
+      dataset: 'production',
       useCdn: false, // false para asegurar que trae datos frescos al compilar
       apiVersion: '2024-03-20', // Usa la fecha actual o esta
     }),

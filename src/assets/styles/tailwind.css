@@ -7,17 +7,18 @@
 @custom-variant intersect (&:not([no-intersect]));
 
 @theme {
+  --font-sans:
+    var(--aw-font-sans, ui-sans-serif), ui-sans-serif, system-ui, sans-serif;
+  --font-serif:
+    var(--aw-font-serif, Georgia, 'Times New Roman', serif);
+  --font-heading:
+    var(--aw-font-heading, var(--aw-font-serif, Georgia, serif));
+
   --color-primary: var(--aw-color-primary);
   --color-secondary: var(--aw-color-secondary);
   --color-accent: var(--aw-color-accent);
   --color-default: var(--aw-color-text-default);
   --color-muted: var(--aw-color-text-muted);
-
-  --font-sans:
-    var(--aw-font-sans, ui-sans-serif), ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
-    'Segoe UI Symbol', 'Noto Color Emoji';
-  --font-serif: var(--aw-font-serif, ui-serif), ui-serif, Georgia, Cambria, 'Times New Roman', Times, serif;
-  --font-heading: var(--aw-font-heading, ui-sans-serif), ui-sans-serif, system-ui, sans-serif;
 
   --animate-fade: fadeInUp 1s both;
 
@@ -31,6 +32,17 @@
       transform: translateY(0);
     }
   }
+}
+
+body {
+  font-family: var(--aw-font-serif);
+  background: var(--aw-color-bg-page);
+  color: var(--aw-color-text-default);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--aw-font-heading);
+  letter-spacing: -0.03em;
 }
 
 @utility bg-page {
